@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <title>Assignment 2</title>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkCcPpCR0sy6HaFRBodRY3ZM6SS3xeuj8&callback=mapinit&libraries=maps,marker"></script>
+</head>
+
+<body>
+    <div class="container" style="width: 560px; height: 560px;">
+        <div class="input">
+            <input id="city" type="text" class="form-control city" placeholder="Enter Location">
+            <button class="button" onclick="getWeather()"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="display">
+            <div class="row" id="displayWeather"></div>
+            <div class="row" id="displayNasa"></div>
+            <div class="row" id="displayNews"></div>
+            <div class="nav-item">
+                <a href="http://localhost:3000/">Log out</a>
+            </div>
+        </div>
+    </div>
+    <div id="map" style="height: 600px; width: 600px;"></div>
+    <script src="./scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+<footer>
+    <h1>Demissenov Danial SE-2206</h1>
+</footer>
+</html>
