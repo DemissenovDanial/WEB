@@ -6,18 +6,25 @@ This project is a web application that provides weather information for a specif
 ### Files:
 admin.css
 Contains CSS styling for admin dashboard elements.
+
 style.css
 Contains general CSS styles used throughout the application.
+
 app.ejs
 Main EJS template file for rendering dynamic content.
+
 app.js
 Main server-side JavaScript file responsible for setting up routes and handling server logic.
+
 login.ejs
-EJS template file for rendering the login page.
+- EJS template file for rendering the login page.
+
 register.ejs
-EJS template file for rendering the registration page.
+- EJS template file for rendering the registration page.
+
 scripts.js
-Client-side JavaScript file containing scripts used throughout the application.
+- Client-side JavaScript file containing scripts used throughout the application.
+
 
 ### Installation:
 **install the project:**
