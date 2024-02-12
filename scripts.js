@@ -131,3 +131,12 @@ function mapUpdate(lon, lat) {
     title: 'my mark'
   });
 }
+
+function toggleData(index) {
+  var dataElement = document.getElementById(index);
+  if (dataElement.style.display === 'none') {
+      dataElement.style.display = 'block';
+  } else {
+      dataElement.style.display = 'none';
+  }
+}

@@ -78,3 +78,9 @@ footer {
     bottom: 0; 
     width: 100%; 
 }
+
+main {
+  width: 50%;
+  height: 50%;
+  margin-bottom: 125px;
+}

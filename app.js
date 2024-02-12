@@ -94,7 +94,10 @@ app.get('/app', async (req, res) => {
 app.get('/admin', async (req, res) => {
     try {
         const users = await User.find().exec();
-        res.render('admin', { users });
+        const weatherRequests = await WeatherData.find().exec();
+        const nasaRequests = await NasaData.find().exec();
+        const newsRequests = await NewsData.find().exec();
+        res.render('admin', { users, weatherRequests, nasaRequests, newsRequests });
     } catch (err) {
         console.error('Error:', err);
         res.status(500).send('Internal Server Error');
@@ -102,13 +105,21 @@ app.get('/admin', async (req, res) => {
 });
 
 const nasaDataSchema = new mongoose.Schema({
-    data: Object 
+    data: Object,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 const NasaData = mongoose.model('NasaData', nasaDataSchema);
 
 const newsDataSchema = new mongoose.Schema({
-    data: Object
+    data: Object,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 const NewsData = mongoose.model('NewsData', newsDataSchema);
@@ -124,7 +135,8 @@ app.get('/getNasa', async (req, res) => {
             res.json(savedNasaData);
         } 
         else {
-            const newSavedNasaData = await NasaData.create({ data: newNasaData });
+            const currentTime = new Date();
+            const newSavedNasaData = await NasaData.create({ data: newNasaData, createdAt: currentTime });
             res.json(newSavedNasaData);
         }
     } catch (err) {
@@ -142,7 +154,8 @@ app.get('/getNews', async (req, res) => {
             if (JSON.stringify(savedNewsData[0].data) === JSON.stringify(newsData)) {
                 res.json(savedNewsData[0]);
             } else {
-                const newSavedNewsData = await NewsData.create({ data: newsData });
+                const currentTime = new Date();
+                const newSavedNewsData = await NewsData.create({ data: newsData, createdAt: currentTime });
                 res.json(newSavedNewsData);
             }
         } else {
@@ -157,7 +170,11 @@ app.get('/getNews', async (req, res) => {
 
 const WeatherData = mongoose.model('WeatherData', new mongoose.Schema({
     city: String,
-    data: Object
+    data: Object,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 }));
 
 app.get('/getWeather', async (req, res) => {
@@ -168,7 +185,8 @@ app.get('/getWeather', async (req, res) => {
         }
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=73cc03e98d83f14402b98544aea117e3`);
         const weatherData = await response.json();
-        await WeatherData.create({ city, data: weatherData });
+        const currentTime = new Date();
+        await WeatherData.create({ city, data: weatherData, createdAt: currentTime });
 
         const savedWeatherData = await WeatherData.findOne({ city }).exec();
         if (savedWeatherData) {

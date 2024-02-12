@@ -26,6 +26,43 @@
                 <% }); %>
             </ul>
         <% } %>
+        <h2>Weather API Requests</h2>
+        <ul>
+            <% weatherRequests.forEach(function(request, index) { %>
+                <li>
+                    Request Date: <%= request.createdAt %><br>
+                    City: <%= request.city %><br>
+                    <button id="toggleButton<%= index %>" onclick="toggleData('data<%= index %>')">Toggle Data</button>
+                    <div id="data<%= index %>" style="display: none;">
+                        Data: <%= JSON.stringify(request.data) %>
+                    </div>
+                </li>
+            <% }); %>
+        </ul>
+        <h2>NASA API Requests</h2>
+        <ul>
+            <% nasaRequests.forEach(function(request, index) { %>
+                <li>
+                    Request Date: <%= request.createdAt %><br>
+                    <button id="toggleButton<%= index %>" onclick="toggleData('nasa<%= index %>')">Toggle Data</button>
+                    <div id="nasa<%= index %>" style="display: none;">
+                        Data: <%= JSON.stringify(request.data) %>
+                    </div>
+                </li>
+            <% }); %>
+        </ul>
+        <h2>News API Requests</h2>
+        <ul>
+            <% newsRequests.forEach(function(request, index) { %>
+                <li>
+                    Request Date: <%= request.createdAt %><br>
+                    <button id="toggleButtonNews<%= index %>" onclick="toggleData('dataNews<%= index %>')">Toggle Data</button>
+                    <div id="dataNews<%= index %>" style="display: none;">
+                        Data: <%= JSON.stringify(request.data) %>
+                    </div>
+                </li>
+            <% }); %>
+        </ul>
         <form action="/admin/add-user" method="POST">
             <input type="text" name="username" placeholder="username">
             <input type="password" name="password" placeholder="password">
@@ -34,6 +71,7 @@
             <button class="button" type="submit">add user</button>
         </form>
     </main>
+    <script src="./scripts.js"></script>
 </body>
 <footer>
     <h1>Demissenov Danial SE-2206</h1>
