@@ -196,3 +196,24 @@ app.post('/admin/add-user', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+app.get('/admin/edit-user/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        res.render('edit-user', { user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.post('/admin/edit-user/:id', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        await User.findByIdAndUpdate(req.params.id, { username, password });
+        res.redirect('/admin');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
