@@ -173,3 +173,26 @@ app.listen(port, () => {
     console.log(`Server is listening at http://localhost:${port}`);
 });
 
+app.get('/admin/delete-user/:id', async (req, res) => {
+    try {
+        await User.findByIdAndDelete(req.params.id);
+        res.redirect('/admin');
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+app.post('/admin/add-user', async (req, res) => {
+    try {
+        const newUser = new User({
+            username: req.body.username,
+            password: req.body.password
+        });
+        await newUser.save();
+        res.redirect('/admin');
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
