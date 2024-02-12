@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Registration</h1>
     <form action="/register" method="POST">
+        <h1>Registration</h1>
         <div>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
@@ -16,10 +17,10 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
         </div>
-        <button>Register</button>
+        <button class="button">Register</button>
+        <div class="nav-item">
+            <a href="http://localhost:3000/">Log in</a>
+        </div>
     </form>
-    <div class="nav-item">
-        <a href="http://localhost:3000/">Log in</a>
-    </div>
 </body>
 </html>
