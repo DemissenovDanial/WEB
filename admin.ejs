@@ -13,14 +13,22 @@
         </header>
         <% if (users.length > 0) { %>
             <h2>Users</h2>
+            <h2>Users</h2>
             <ul>
                 <% users.forEach(function(user) { %>
                     <li><%= user.username %></li>
                     <a href="/admin/delete-user/<%= user._id %>">delete</a>
                     <a href="/admin/edit-user/<%= user._id %>">edit</a>
+                    <a href="/admin/delete-user/<%= user._id %>">delete</a>
+                    <a href="/admin/edit-user/<%= user._id %>">edit</a>
                 <% }); %>
             </ul>
         <% } %>
+        <form action="/admin/add-user" method="POST">
+            <input type="text" name="username" placeholder="username">
+            <input type="password" name="password" placeholder="password">
+            <button type="submit">add user</button>
+        </form>        
         <form action="/admin/add-user" method="POST">
             <input type="text" name="username" placeholder="username">
             <input type="password" name="password" placeholder="password">
