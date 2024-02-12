@@ -3,27 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Админ-панель</title>
+    <title>Admin page</title>
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <header>
-        <h1>Добро пожаловать в админ-панель</h1>
-    </header>
     <main>
+        <header>
+            <h1>Welcome to admin panel</h1>
+        </header>
         <% if (users.length > 0) { %>
-            <h2>Пользователи</h2>
+            <h2>Users</h2>
             <ul>
                 <% users.forEach(function(user) { %>
                     <li><%= user.username %></li>
+                    <a href="/admin/delete-user/<%= user._id %>">delete</a>
+                    <a href="/admin/edit-user/<%= user._id %>">edit</a>
                 <% }); %>
             </ul>
-        <% } else { %>
-            <p>Нет зарегистрированных пользователей</p>
         <% } %>
+        <form action="/admin/add-user" method="POST">
+            <input type="text" name="username" placeholder="username">
+            <input type="password" name="password" placeholder="password">
+            <button type="submit">add user</button>
+        </form>        
     </main>
-    <footer>
-        <p>&copy; 2024 Все права защищены</p>
-    </footer>
 </body>
+<footer>
+    <h1>Demissenov Danial SE-2206</h1>
+</footer>
 </html>
