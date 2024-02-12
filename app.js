@@ -20,7 +20,19 @@ mongoose.connect(MONGODB_URI)
 
 const userSchema = new mongoose.Schema({
     username: String,
-    password: String
+    password: String,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    updatedAt: {
+        type: Date,
+        default: Date.now
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const User = mongoose.model('User', userSchema);
@@ -42,9 +54,10 @@ app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     try {
         const user = await User.findOne({ username, password }).exec();
+        const isAdmin = user.isAdmin;
         if (user) {
-            if (username === 'Danial' && password === 'admin') {
-                res.redirect('/admin');
+            if (isAdmin == true) {
+                res.redirect('/admin')
             } else {
                 res.redirect('/app');
             }
@@ -81,7 +94,7 @@ app.get('/app', async (req, res) => {
 app.get('/admin', async (req, res) => {
     try {
         const users = await User.find().exec();
-        res.render('admin', { users: users });
+        res.render('admin', { users });
     } catch (err) {
         console.error('Error:', err);
         res.status(500).send('Internal Server Error');
@@ -185,9 +198,12 @@ app.get('/admin/delete-user/:id', async (req, res) => {
 
 app.post('/admin/add-user', async (req, res) => {
     try {
+        const { username, password } = req.body;
+        const isAdmin = req.body.isAdmin === 'on';
         const newUser = new User({
-            username: req.body.username,
-            password: req.body.password
+            username,
+            password,
+            isAdmin
         });
         await newUser.save();
         res.redirect('/admin');
@@ -209,8 +225,13 @@ app.get('/admin/edit-user/:id', async (req, res) => {
 
 app.post('/admin/edit-user/:id', async (req, res) => {
     try {
-        const { username, password } = req.body;
-        await User.findByIdAndUpdate(req.params.id, { username, password });
+        const { username, password, isAdmin } = req.body;
+        const updatedUser = {
+            username,
+            password,
+            isAdmin
+        };
+        await User.findByIdAndUpdate(req.params.id, updatedUser);
         res.redirect('/admin');
     } catch (error) {
         console.error(error);

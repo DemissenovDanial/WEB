@@ -15,15 +15,22 @@
             <h2>Users</h2>
             <ul>
                 <% users.forEach(function(user) { %>
-                    <li><%= user.username %></li>
-                    <a href="/admin/delete-user/<%= user._id %>">delete</a>
-                    <a href="/admin/edit-user/<%= user._id %>">edit</a>
+                    <li>
+                        Username: <%= user.username %><br>
+                        Created At: <%= user.createdAt %><br>
+                        Updated At: <%= user.updatedAt %><br>
+                        Is Admin: <%= user.isAdmin %><br>
+                        <a href="/admin/delete-user/<%= user._id %>">delete</a>
+                        <a href="/admin/edit-user/<%= user._id %>">edit</a>
+                    </li>
                 <% }); %>
             </ul>
         <% } %>
         <form action="/admin/add-user" method="POST">
             <input type="text" name="username" placeholder="username">
             <input type="password" name="password" placeholder="password">
+            <input type="checkbox" name="isAdmin" id="isAdmin">
+            <label for="isAdmin">Is Admin</label>
             <button class="button" type="submit">add user</button>
         </form>
     </main>
