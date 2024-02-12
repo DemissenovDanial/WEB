@@ -22,6 +22,15 @@ This project is a web application that provides weather information for a specif
 **scripts.js**
 - Client-side JavaScript file containing scripts used throughout the application.
 
+**admin.css**
+- Contains CSS styles for the admin page.
+
+**admin.ejs**
+- EJS template file for rendering the admin page.
+
+**edit-user.ejs**
+- EJS template file for rendering the edit-user page.
+
 
 ### Installation:
 **install the project:**
