@@ -48,6 +48,9 @@ npm install
 node app.js
 ```
 
+Admin login: Danial
+Admin password: admin
+
 ### Used API's:
 1) **OpenWeatherMap API: Shows the weather in a entered city**
 2) **NASA APOD API: Shows the actual interesting news of the day according to NASA**
